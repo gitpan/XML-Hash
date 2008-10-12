@@ -4,7 +4,7 @@ use ExtUtils::MakeMaker;
 
 WriteMakefile(
     NAME                => 'XML::Hash',
-    AUTHOR              => 'Luis Azevedo <labraceta@gmail.com>',
+    AUTHOR              => 'Luis Azevedo <braceta@cpan.org>',
     VERSION_FROM        => 'lib/XML/Hash.pm',
     ABSTRACT_FROM       => 'lib/XML/Hash.pm',
     PL_FILES            => {},

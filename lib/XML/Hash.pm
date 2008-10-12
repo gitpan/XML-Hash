@@ -22,7 +22,7 @@ our %XMLOUT_SIMPLE_OPTIONS = (
 
 __PACKAGE__->mk_accessors(qw/xml_handler/);
 
-our $VERSION = '0.90';
+our $VERSION = '0.91';
 
 sub new {
     my $class = shift;
@@ -94,7 +94,7 @@ XML::Hash - Converts from a XML into a Hash.
 
 =head1 VERSION
 
-Version 0.90
+Version 0.91
 
 =head1 SYNOPSYS
 
@@ -159,7 +159,7 @@ The interface it is OO based and extents XML::Simple functionality.
 
 =head1 AUTHOR
 
-Luis Azevedo, C<< <labraceta at gmail.com> >>
+Luis Azevedo, C<< <braceta@cpan.org> >>
 
 =head1 SUPPORT
 
