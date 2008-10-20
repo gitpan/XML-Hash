@@ -21,7 +21,7 @@ our %XMLOUT_SIMPLE_OPTIONS = (
     KeyAttr    => []
 );
 
-our $VERSION = '0.93';
+our $VERSION = '0.94';
 
 sub new {
     my $class = shift;
@@ -120,7 +120,7 @@ XML::Hash - Converts from a XML into a Hash.
 
 =head1 VERSION
 
-Version 0.92
+Version 0.94
 
 =head1 SYNOPSYS
 
