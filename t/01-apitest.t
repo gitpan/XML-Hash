@@ -45,3 +45,15 @@ my $xml_doc = $xml_converter->fromHashtoDOM($xml_hash);
 #diag("Got a ref: " . $xml_doc->toString());
 isa_ok( $xml_doc, "XML::DOM::Document", "fromHashtoDOM: Convertion from a HASH back into a XML::DOM::Document");
 
+# Test 5: Convertion from a File into a HASH
+#$xml_hash = $xml_converter->fromXMLFiletoHash("book.xml");
+#diag("Got a ref: " .Dumper($xml_hash));
+#isnt( $xml_hash, undef,"fromXMLFiletoHash: Convertion from a File into a HASH");
+
+# Test 6: Convertion from a Hash back into a file
+#my $xml_doc = $xml_converter->fromHashtoXMLFile("book_test.xml);
+#diag("Got a ref: " . $xml_doc->toString());
+#isa_ok( $xml_doc, "XML::DOM::Document", "fromHashtoXMLFile: Convertion from a Hash back into a file");
+
+
+

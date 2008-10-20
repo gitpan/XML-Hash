@@ -2,9 +2,10 @@ package XML::Hash;
 
 use warnings;
 use strict;
-use base qw/XML::Simple Class::Accessor::Fast/;
+use base qw/XML::Simple/;
 use Carp;
 use XML::DOM;
+use File::Slurp; 
 
 # Config options
 our %XMLIN_SIMPLE_OPTIONS = (
@@ -20,9 +21,7 @@ our %XMLOUT_SIMPLE_OPTIONS = (
     KeyAttr    => []
 );
 
-__PACKAGE__->mk_accessors(qw/xml_handler/);
-
-our $VERSION = '0.92';
+our $VERSION = '0.93';
 
 sub new {
     my $class = shift;
@@ -46,10 +45,17 @@ sub new {
 
     $self = bless( $self, $class );
 
-    $self->xml_handler( XML::Simple->new(%XMLIN_SIMPLE_OPTIONS) );
+    $self->_xml_handler( XML::Simple->new(%XMLIN_SIMPLE_OPTIONS) );
     return $self;
 }
 
+sub _xml_handler {
+	my ($self, $handler) = @_;
+	
+	$self->{'xml_handler'} ||= $handler; 
+	
+	return $self->{'xml_handler'};
+}
 sub fromDOMtoHash {
     my ( $self, $xml ) = @_;
 
@@ -72,7 +78,7 @@ sub fromXMLStringtoHash {
 
     croak "You must specify a XML string" unless ( defined $xml_str );
 
-    return $self->xml_handler()->XMLin( $xml_str, %XMLIN_SIMPLE_OPTIONS );
+    return $self->_xml_handler()->XMLin( $xml_str, %XMLIN_SIMPLE_OPTIONS );
 }
 
 sub fromHashtoXMLString {
@@ -80,9 +86,29 @@ sub fromHashtoXMLString {
 
     croak "You must specify a Hash to converto into XML" unless ( ref($hash) eq "HASH" );
 
-    return $self->xml_handler()->XMLout( $hash, %XMLOUT_SIMPLE_OPTIONS );
+    return $self->_xml_handler()->XMLout( $hash, %XMLOUT_SIMPLE_OPTIONS );
 
 }
+
+#sub fromXMLFiletoHash {
+#    my ( $self, $xml_str ) = @_;
+#
+#    croak "You must specify a filename" unless ( defined $xml_str );
+
+#    return $self->xml_handler()->XMLin( $xml_str, %XMLIN_SIMPLE_OPTIONS );
+#}
+
+#sub fromHashtoXMLFile {
+#    my ( $self, $hash, $filename ) = @_;
+
+#    croak "You must specify a Hash to convert into XML file" unless ( ref($hash) eq "HASH" and $filename);
+	
+#	my $output = $self->xml_handler()->XMLout( $hash, %XMLOUT_SIMPLE_OPTIONS );
+	
+#	write_file($filename, $output);
+	
+#	return $output; 
+#}
 
 1;    # End of XML::Hash
 
@@ -98,19 +124,19 @@ Version 0.92
 
 =head1 SYNOPSYS
 
-my $xml_converter = XML::Hash->new();
+	my $xml_converter = XML::Hash->new();
 
-# Convertion from a XML String to a Hash
-my $xml_hash = $xml_converter->fromXMLStringtoHash($xml);
+	# Convertion from a XML String to a Hash
+	my $xml_hash = $xml_converter->fromXMLStringtoHash($xml);
 
-# Convertion from a Hash back into a XML String
-my $xml_str = $xml_converter->fromHashtoXMLString($xml_hash);
+	# Convertion from a Hash back into a XML String
+	my $xml_str = $xml_converter->fromHashtoXMLString($xml_hash);
 
-#  Convertion from a XML::DOM::Document into a HASH
-$xml_hash = $xml_converter->fromDOMtoHash($xml_doc);
+	#  Convertion from a XML::DOM::Document into a HASH
+	$xml_hash = $xml_converter->fromDOMtoHash($xml_doc);
 
-# Convertion from a HASH back info a XML::DOM::Document
-my $xml_doc = $xml_converter->fromHashtoDOM($xml_hash);
+	# Convertion from a HASH back info a XML::DOM::Document
+	my $xml_doc = $xml_converter->fromHashtoDOM($xml_hash);
 
 =head1 DESCRIPTION
 
@@ -126,9 +152,9 @@ The interface it is OO based and extents XML::Simple functionality.
 =over 2
 
 =item B<new>
-	
+
 	Constructor: passes the default options to XML::Simple superclass
-	
+
 =item B<fromDOMtoHash>
 
 	Converts from XML::DOM::Document to a Hash
@@ -155,7 +181,6 @@ The interface it is OO based and extents XML::Simple functionality.
 	$self->fromHashtoXMLString($hash)
 
 =back
-
 
 =head1 AUTHOR
 
