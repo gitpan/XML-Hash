@@ -6,3 +6,5 @@ Revision history for XML-Hash
 		Docs updated, dependencies corrected
 0.94	20-11-2008
 		Updated version
+0.95	21-11-2008
+		Fixed license in ExtUtils::MakeMaker and added META.yml

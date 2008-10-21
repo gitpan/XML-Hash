@@ -1,6 +1,7 @@
 use Test::More tests => 4;
 use Test::XML;
 use strict;
+use warnings; 
 
 use XML::Hash;
 use XML::DOM;
@@ -41,7 +42,7 @@ $xml_hash = $xml_converter->fromDOMtoHash($xml_doc);
 isnt( $xml_hash, undef,"fromDOMtoHash: Convertion from a XML::DOM::Document into a HASH");
 
 # Test 4: Convertion from a HASH back info a XML::DOM::Document
-my $xml_doc = $xml_converter->fromHashtoDOM($xml_hash);
+$xml_doc = $xml_converter->fromHashtoDOM($xml_hash);
 #diag("Got a ref: " . $xml_doc->toString());
 isa_ok( $xml_doc, "XML::DOM::Document", "fromHashtoDOM: Convertion from a HASH back into a XML::DOM::Document");
 

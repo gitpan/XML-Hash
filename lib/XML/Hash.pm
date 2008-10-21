@@ -21,7 +21,7 @@ our %XMLOUT_SIMPLE_OPTIONS = (
     KeyAttr    => []
 );
 
-our $VERSION = '0.94';
+our $VERSION = '0.95';
 
 sub new {
     my $class = shift;
@@ -118,10 +118,6 @@ __END__
 
 XML::Hash - Converts from a XML into a Hash.
 
-=head1 VERSION
-
-Version 0.94
-
 =head1 SYNOPSYS
 
 	my $xml_converter = XML::Hash->new();
@@ -196,5 +192,7 @@ You can find documentation for this module with the perldoc command.
 
 Copyright 2008 Luis Azevedo, all rights reserved.
 
-This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
+This program is free software licensed under the BSD License
+
+The full text of the license can be found in the
+LICENSE file included with this module.
